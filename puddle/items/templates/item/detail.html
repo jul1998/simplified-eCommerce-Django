@@ -1,0 +1,49 @@
+{% extends "core/base.html"%}
+
+
+{% block title %}{{item.name}}{% endblock %}
+
+
+{%block content%}
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-8">
+<img src="{{ item.image.url }}" style="height: 600px;" class="img-fluid" alt="...">
+    </div>
+    <div class="col-sm-4 bg-body-tertiary">
+      <h1 class="d-flex justify-content-start">{{item.name}}</h1>
+      <p class="d-flex justify-content-start fs-6 text-secondary">Price: {{item.price}}</p>
+      <p class="d-flex justify-content-start fs-6 text-secondary">Seller: {{item.created_by}}</p>
+      {%if item.description%}
+        <p class="d-flex justify-content-start fs-6 text-secondary"> Description: <strong><br>{{item.description}}</strong></p>
+        {%endif%}
+        <p class="d-flex justify-content-start fs-6 text-secondary"> Category: {{item.category}}</p>
+      <button type="button" class="btn btn-info btn-lg d-flex justify-content-start mt-5">Contact seller</button>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  <div class="row">
+            <h2>Related items</h2>
+      {%for item in related_items%}
+    <div class="col-md-3">
+      <div class="card mb-4">
+
+        <img src="{{item.image.url}}" class="img-thumbnail" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">
+              {{item.name}}
+          </h5>
+          <p class="card-text">Price: {{item.price}}</p>
+             <p class="card-text">Description: {{item.description}}</p>
+            <a href="{% url 'items:detail' item.id %}">View Item</a>
+        </div>
+      </div>
+    </div>
+{%endfor%}
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,55 @@
+{% extends "core/base.html"%}
+
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="container m-5 p-3 bg-body-secondary">
+  <h2>Sign up</h2>
+
+  <form class="" action="." method="post">
+    {% csrf_token %}
+
+
+    {{form.non_field_errors }}
+     <div class="mb-3">
+       <label for="username" class="form-label">Username</label>
+      {{form.username}}
+      {{form.username.errors}}
+     </div>
+
+        <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+          {{form.email}}
+          {{form.email.errors}}
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="password1" class="form-label">Password</label>
+    {{form.password1}}
+    {{form.password1.errors}}
+  </div>
+
+      <div class="mb-3">
+    <label for="password2" class="form-label">Repeat Password</label>
+    {{form.password2}}
+    {{form.password2.errors}}
+  </div>
+
+    {% if form.errors  or form.non_field_errors%}
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        {% for error in form.errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+</div>
+{%endblock%}

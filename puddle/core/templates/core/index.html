@@ -1,0 +1,46 @@
+{% extends "core/base.html"%}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="container">
+  <div class="row">
+      {%for item in items%}
+    <div class="col-md-3">
+      <div class="card mb-4">
+
+        <img src="{{item.image.url}}" class="img-thumbnail" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">
+              {{item.name}}
+          </h5>
+          <p class="card-text">Price: {{item.price}}</p>
+             <p class="card-text">Description: {{item.description}}</p>
+            <a href="{% url 'items:detail' item.id %}">View Item</a>
+        </div>
+      </div>
+    </div>
+{%endfor%}
+  </div>
+
+        <div class="container">
+  <div class="row">
+      {%for category in categories%}
+        <div class="col-md-3">
+      <div class="card mb-4">
+          <div class="card-body">
+          <h5 class="card-title">
+              {{category.name}}
+          </h5>
+             <p class="card-text"> {{category.name}}Items</p>
+        </div>
+      </div>
+    </div>
+      {%endfor%}
+  </div>
+            </div>
+
+
+
+    </div>
+{% endblock %}
