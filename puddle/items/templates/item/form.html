@@ -1,0 +1,36 @@
+{% extends "core/base.html"%}
+
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+
+<div class="container m-5 p-3 bg-body-secondary w-75 p-3">
+
+<h1>{{title}}</h1>
+
+<form enctype="multipart/form-data" class="" action="." method="post">
+  {% csrf_token %}
+
+ <div class="mb-3">
+   {{form.as_p}}
+ </div>
+
+  {% if form.errors  or form.non_field_errors%}
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        {% for error in form.errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{%endblock%}
+
