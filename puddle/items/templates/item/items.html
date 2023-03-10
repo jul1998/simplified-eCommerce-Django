@@ -1,0 +1,63 @@
+{% extends "core/base.html"%}
+
+
+{% block title %}Items search{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+<div style="width:200px;" class="col-lg-3 col-md-4 col-sm-6 bg-dark-subtle">
+      <div class="sidebar">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <form method="GET" action="{%url 'items:items'%}">
+              <label for="exampleDataList" class="form-label">Search item</label>
+<input name="query" value="{{ query }}" class="form-control" id="exampleDataList" placeholder="Type to search...">
+            </form>
+              <div class="text-success">
+  <hr>
+</div>
+              <p>Categories</p>
+              <ul>
+                {% for category in categories %}
+                  <li>
+                    <a href="{% url 'items:items' %}?query={{ query }}&category={{category.id}}">{{ category.name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+
+              <div class="text-success">
+  <hr>
+</div>
+              <p>Clear filters</p>
+
+              <ul>
+                <li>
+                  <a href="{% url 'items:items' %}">Clear</a>
+                </li>
+              </ul>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-6">
+      <div class="row">
+        {% for item in items %}
+          <div class="col-md-3">
+            <div class="card mb-4">
+              <img src="{{ item.image.url }}" class="img-thumbnail" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">Price: {{ item.price }}</p>
+                <p class="card-text">Description: {{ item.description }}</p>
+                <a href="{% url 'items:detail' item.id %}">View Item</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -18,7 +18,15 @@
         <p class="d-flex justify-content-start fs-6 text-secondary"> Description: <strong><br>{{item.description}}</strong></p>
         {%endif%}
         <p class="d-flex justify-content-start fs-6 text-secondary"> Category: {{item.category}}</p>
-      <button type="button" class="btn btn-info btn-lg d-flex justify-content-start mt-5">Contact seller</button>
+
+        {%if request.user == item.created_by%}
+            <div class="">
+                <a href="{%url 'items:edit' item.id%}" class="btn btn-info d-block p-2 justify-content-start mt-5">Edit</a>
+                <a href="{% url 'items:delete' item.id %}" class="btn btn-danger d-block  p-2 justify-content-start mt-5">Delete</a>
+            </div>
+        {%else%}
+              <button type="button" class="btn btn-info btn-lg d-flex justify-content-start mt-5">Contact seller</button>
+        {%endif%}
 
     </div>
   </div>
