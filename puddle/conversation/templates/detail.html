@@ -1,0 +1,19 @@
+{% extends "core/base.html"%}
+
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Conversation</h1>
+    </div>
+
+    {% for message in conversation.messages.all %}
+        <div class="row mt-3">
+           <div>
+                <p>{{ message.created_by.username }}</p>
+                <p>{{ message.content }}</p>
+                <p>{{ message.created_at }}</p>
+           </div>
+        </div>
+    {% endfor %}
+{% endblock %}

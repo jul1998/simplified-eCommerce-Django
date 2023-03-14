@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.contrib.auth.decorators import login_required
 from items.models import Item
 from .models import Conversation
 from .forms import ConversationMessageForm
+@login_required
 def new_conversation(request, item_pk):
     item = get_object_or_404(Item, pk=item_pk)
 
@@ -31,4 +32,12 @@ def new_conversation(request, item_pk):
         form = ConversationMessageForm()
     return render(request, 'conversation.html', {"form": form})
 
+@login_required
+def inbox(request):
+    conversations = Conversation.objects.filter(members__in=[request.user.id])
+    return render(request, 'inbox.html', {"conversations": conversations})
 
+@login_required
+def detail(request, pk):
+    conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
+    return render(request, 'detail.html', {"conversation": conversation})
